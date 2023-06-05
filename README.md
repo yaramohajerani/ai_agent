@@ -23,7 +23,7 @@ I recommend adding actions for your daily tools like gmail, calendar, docs, shee
      <div style="flex:1;padding-left:10px;">
           <img src="images.dir/slack_actions.png" width="30%"/>
      </div>
-  <div style="flex:1;padding-left:10px;">
+     <div style="flex:1;padding-left:10px;">
           <img src="images.dir/docs_actions.png" width="30%"/>
      </div>
 </div>
