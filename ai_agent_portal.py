@@ -5,6 +5,8 @@ from re import compile as re_compile
 from typing import Pattern
 
 import streamlit as st
+from htbuilder import HtmlElement, div, hr, a, p, styles
+from htbuilder.units import percent, px
 from langchain.agents import initialize_agent
 from langchain.agents.agent import AgentExecutor
 from langchain.agents.agent_toolkits import ZapierToolkit
@@ -40,6 +42,59 @@ def setup_agent(openai_api_key: str, zapier_api_key: str) -> AgentExecutor:
         tool_expander.write(tool.description)
 
     return agent
+
+
+def footer_layout(*args) -> None:
+    """
+    Layout for footer
+
+    :param args: footer args passed as a list (text and links html blocks as separate argument)
+    :return: None
+    """
+    style = """
+    <style>
+      MainMenu {visibility: visible;}
+      footer {visibility: visible;}
+    </style>
+    """
+
+    style_div: str = styles(
+        left=0,
+        bottom=0,
+        margin=px(0, 0, 0, 0),
+        width=percent(100),
+        text_align="center",
+        height="60px",
+        opacity=0.6
+    )
+
+    style_hr: str = styles()
+
+    body = p()
+    foot = div(style=style_div)(hr(style=style_hr), body)
+
+    st.markdown(style, unsafe_allow_html=True)
+
+    for arg in args:
+        if isinstance(arg, str):
+            body(arg)
+        elif isinstance(arg, HtmlElement):
+            body(arg)
+
+    st.markdown(str(foot), unsafe_allow_html=True)
+
+
+def add_footer() -> None:
+    """
+    Add footer to page
+
+    :return: None
+    """
+    footer_args = [
+        "<b>Yara Mohajerani &copy; 2023 | Contact ",
+        a(_href="https://twitter.com/yara_mo_", _target="_blank")("@yara_mo_")
+    ]
+    footer_layout(*footer_args)
 
 
 def remove_ansi_escape_codes(text: str) -> str:
@@ -167,3 +222,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    add_footer()
