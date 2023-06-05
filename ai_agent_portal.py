@@ -115,6 +115,8 @@ def main():
                   "Slack messages, reminders and calendars events, interact with users and documents, and more...]*")
     col2.image("images.dir/robot_logo.png")
 
+    st.video('https://youtu.be/DPoGo01QO5Y', format="video/mp4", start_time=0)
+
     main_tab, setup_tab, docs_tab = st.tabs(["Main", "How to Setup", "Other Notes and Docs"])
 
     with main_tab:
@@ -125,7 +127,7 @@ def main():
             # initialize agents
             agent: AgentExecutor = setup_agent(openai_api_key, zapier_api_key)
 
-            user_prompt: str = col1.text_area("Enter Prompt", placeholder='Enter Prompt', label_visibility='collapsed')
+            user_prompt: str = st.text_area("Enter Prompt", placeholder='Enter Prompt', label_visibility='collapsed')
 
             if user_prompt.strip() not in ["", "Enter Prompt"]:
                 stdout: StringIO = StringIO()
