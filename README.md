@@ -12,7 +12,10 @@ In order to use this tool, you need an OpenAI API key, and a Zapier NLA API key:
 - **Zapier**: This toolkit also uses the [Zapier NLA](https://nla.zapier.com/docs/) (Natural Language Actions) API. Once you create a Zapier account, you can set up action settings for the API [here](https://nla.zapier.com/providers/). Your action settings determine what your API key will have access to, such as your email, Slack, and 5000+ other applications made available through Zapier. The portal's sidebar will inform you what you have access to once you input your key. 
         
 I recommend adding actions for your daily tools like gmail, calendar, docs, sheets, and Slack to get the most out of your AI assistant!
-![GMAIL ACTIONS](images.dir/gmail_actions.png)
-![CALENDAR ACTIONS](images.dir/calendar_actions.png)
-![SLACK ACTIONS](images.dir/slack_actions.png)
-![DOCS ACTIONS](images.dir/docs_actions.png)
+
+<p float="left">
+  <img src="images.dir/gmail_actions.png" width="100" />
+  <img src="images.dir/calendar_actions.png" width="100" /> 
+  <img src="images.dir/slack_actions.pn" width="100" />
+  <img src="images.dir/docs_actions.png" width="100" />
+</p>
