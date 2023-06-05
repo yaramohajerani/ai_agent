@@ -57,8 +57,8 @@ def main():
     col1, col2 = st.columns(2)
     col1.title("Welcome to your AI's central command! 🤖")
     col1.markdown("*:lightgrey[where you can use the power of ChatGPT to read and create emails, "
-                  "Slack messages, reminders, and more]*")
-    col2.image("robot_logo.png")
+                  "Slack messages, reminders and calendars events, interact with users and documents, and more...]*")
+    col2.image("images.dir/robot_logo.png")
 
     main_tab, setup_tab, docs_tab = st.tabs(["Main", "How to Setup", "Other Notes and Docs"])
 
@@ -93,6 +93,8 @@ def main():
                     st.markdown(output_string, unsafe_allow_html=True)
 
                 stdout.close()
+        else:
+            st.write("👈 Provide your API keys on the left to see the toolkit 🙂")
 
     with setup_tab:
         st.markdown("""
@@ -106,7 +108,17 @@ def main():
         [here](https://nla.zapier.com/providers/). Your action settings determine what your API key will have access to, 
         such as your email, Slack, and 5000+ other applications made available through Zapier. The portal's sidebar will 
         inform you what you have access to once you input your key. 
+        
+        I recommend adding actions for your daily tools like gmail, calendar, docs, sheets, and Slack to get the 
+        most out of your AI assistant!
         """, unsafe_allow_html=True)
+
+        # add screenshots of Zapier actiosn
+        image_col1, image_col2 = st.columns(2)
+        image_col1.image('images.dir/gmail_actions.png')
+        image_col2.image('images.dir/calendar_actions.png')
+        image_col1.image('images.dir/slack_actions.png')
+        image_col2.image('images.dir/docs_actions.png')
 
     with docs_tab:
         st.markdown("""
