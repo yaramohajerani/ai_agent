@@ -1,6 +1,6 @@
 # Your Personal AI Agent 🤖
 
-💻 *Access the **webapp** at [https://yara-ai.streamlit.app/](https://yara-ai.streamlit.app/)*
+💻 Use the toolkit using the webapp: [https://yara-ai.streamlit.app/](https://yara-ai.streamlit.app/)
 
 ---
 
