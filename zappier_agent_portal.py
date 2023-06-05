@@ -26,11 +26,10 @@ def setup_agent(openai_api_key: str, zapier_api_key: str) -> AgentExecutor:
                              agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
                              verbose=True)
 
-    st.sidebar.title("Available Tools based on your Zapier API key:")
+    st.sidebar.markdown("**Available Tools based on your Zapier API key**")
     for tool in toolkit.get_tools():
-        st.sidebar.subheader(tool.name)
-        st.sidebar.write(tool.description)
-        st.sidebar.write("\n\n")
+        tool_expander = st.sidebar.expander(tool.name)
+        tool_expander.write(tool.description)
 
     return agent
 
@@ -41,12 +40,11 @@ def remove_ansi_escape_codes(text: str) -> str:
 
 
 def main():
-    col1, col2 = st.columns([5, 2])
+    col1, col2 = st.columns(2)
     col1.title("Welcome to your AI's central command! 🤖")
-    col1.caption("BETA")
-    col2.image(
-        "DALL·E 2023-06-04 14.20.46 - High resolution realistic image of a command room where a humanoid robot "
-        "sitting behind a large desk controls the world on a giant wall-to-wall screen.png")
+    col1.markdown("*:lightgrey[where you can use the power of ChatGPT to read and create emails, "
+                  "Slack messages, reminders, and more]*")
+    col2.image("robot_logo.png")
 
     openai_api_key: str = st.sidebar.text_input("OPENAI API KEY", type="password")
     zapier_api_key: str = st.sidebar.text_input("ZAPIER NLA API KEY", type="password")
@@ -55,9 +53,9 @@ def main():
         # initialize agents
         agent: AgentExecutor = setup_agent(openai_api_key, zapier_api_key)
 
-        user_prompt: str = st.text_input("Enter Prompt")
+        user_prompt: str = col1.text_area("", placeholder='Enter Prompt', label_visibility='collapsed')
 
-        if user_prompt.strip() != "":
+        if user_prompt.strip() not in ["", "Enter Prompt"]:
             stdout = StringIO()
             try:
                 with redirect_stdout(stdout):
@@ -73,14 +71,9 @@ def main():
                 output_string = output_string.replace('Action', '\n**Action**')
                 output_string = output_string.replace('Observation', '\n**Observation**')
                 output_string = output_string.replace('Thought', '\n**Thought**')
-                output_string = output_string.replace('Thought', '\n**Thought**')
                 output_string = output_string.replace('Final Answer', '\n**Final Answer**')
 
                 st.markdown(output_string, unsafe_allow_html=True)
-
-    st.markdown("""---""")
-    st.markdown("<center><p>Yara Mohajerani &copy; 2023. All Rights Reserved.</p></center>",
-                unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
