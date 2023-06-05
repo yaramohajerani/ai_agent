@@ -17,5 +17,5 @@ I recommend adding actions for your daily tools like gmail, calendar, docs, shee
   <img src="images.dir/gmail_actions.png" width="40%" />
   <img src="images.dir/calendar_actions.png" width="42%" /> 
   <img src="images.dir/slack_actions.png" width="40%" />
-  <img src="images.dir/docs_actions.png" width="41%" />
+  <img src="images.dir/docs_actions.png" width="40%" />
 </p>
