@@ -1,6 +1,6 @@
 # Your Personal AI Agent 🤖
 
-💻 You can use this toolkit at [https://yara-ai.streamlit.app/](https://yara-ai.streamlit.app/) 🎉
+💻 You can use this toolkit at [https://yara-mo-ai.streamlit.app](https://yara-mo-ai.streamlit.app) 🎉
 
 ---
 
