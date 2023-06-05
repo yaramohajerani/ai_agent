@@ -13,9 +13,17 @@ In order to use this tool, you need an OpenAI API key, and a Zapier NLA API key:
         
 I recommend adding actions for your daily tools like gmail, calendar, docs, sheets, and Slack to get the most out of your AI assistant!
 
-<p float="left">
-  <img src="images.dir/gmail_actions.png" width="30%" />
-  <img src="images.dir/calendar_actions.png" width="30%" /> 
-  <img src="images.dir/slack_actions.png" width="30%" />
-  <img src="images.dir/docs_actions.png" width="30%" />
- </p>
+<div style="display:flex">
+     <div style="flex:1;padding-right:10px;">
+          <img src="images.dir/gmail_actions.png" width="35%"/>
+     </div>
+     <div style="flex:1;padding-left:10px;">
+          <img "images.dir/calendar_actions.png" width="30%"/>
+     </div>
+     <div style="flex:1;padding-left:10px;">
+          <img src="images.dir/slack_actions.png" width="30%"/>
+     </div>
+  <div style="flex:1;padding-left:10px;">
+          <img src="images.dir/docs_actions.png" width="30%"/>
+     </div>
+</div>
