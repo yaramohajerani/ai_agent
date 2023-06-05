@@ -2,6 +2,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 from os import environ
 from re import compile as re_compile
+from typing import Pattern
 
 import streamlit as st
 from langchain.agents import initialize_agent
@@ -14,17 +15,24 @@ from langchain.utilities.zapier import ZapierNLAWrapper
 
 @st.cache_resource
 def setup_agent(openai_api_key: str, zapier_api_key: str) -> AgentExecutor:
+    """
+    Set up agents using the Zapier NLA (Natural Language Actions) toolkit
+
+    :param openai_api_key: OpenAI API key provided by user
+    :param zapier_api_key: Zapier NLA API key provided by user
+    :return:
+    """
     # set api keys as environmental variables
     environ['OPENAI_API_KEY'] = openai_api_key
     environ['ZAPIER_NLA_API_KEY'] = zapier_api_key
 
-    llm = OpenAI(temperature=0)
-    zapier = ZapierNLAWrapper()
-    toolkit = ZapierToolkit.from_zapier_nla_wrapper(zapier)
-    agent = initialize_agent(toolkit.get_tools(),
-                             llm,
-                             agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-                             verbose=True)
+    llm: OpenAI = OpenAI(temperature=0)
+    zapier: ZapierNLAWrapper = ZapierNLAWrapper()
+    toolkit: ZapierToolkit = ZapierToolkit.from_zapier_nla_wrapper(zapier)
+    agent: AgentExecutor = initialize_agent(toolkit.get_tools(),
+                                            llm,
+                                            agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+                                            verbose=True)
 
     st.sidebar.markdown("**Available Tools based on your Zapier API key**")
     for tool in toolkit.get_tools():
@@ -35,7 +43,13 @@ def setup_agent(openai_api_key: str, zapier_api_key: str) -> AgentExecutor:
 
 
 def remove_ansi_escape_codes(text: str) -> str:
-    ansi_escape_pattern = re_compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+    """
+    Langchain output includes ANSI escape codes for colors. This function removes them.
+
+    :param text: Input text with ANSI escape codes
+    :return: cleaned text
+    """
+    ansi_escape_pattern: Pattern = re_compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
     return ansi_escape_pattern.sub('', text)
 
 
@@ -52,14 +66,14 @@ def main():
         openai_api_key: str = st.sidebar.text_input("OPENAI API KEY", type="password")
         zapier_api_key: str = st.sidebar.text_input("ZAPIER NLA API KEY", type="password")
 
-        if openai_api_key != '' and zapier_api_key != '':
+        if openai_api_key.strip() != '' and zapier_api_key.strip() != '':
             # initialize agents
             agent: AgentExecutor = setup_agent(openai_api_key, zapier_api_key)
 
             user_prompt: str = col1.text_area("Enter Prompt", placeholder='Enter Prompt', label_visibility='collapsed')
 
             if user_prompt.strip() not in ["", "Enter Prompt"]:
-                stdout = StringIO()
+                stdout: StringIO = StringIO()
                 try:
                     with redirect_stdout(stdout):
                         agent.run(user_prompt)
@@ -77,6 +91,8 @@ def main():
                     output_string = output_string.replace('Final Answer', '\n**Final Answer**')
 
                     st.markdown(output_string, unsafe_allow_html=True)
+
+                stdout.close()
 
     with setup_tab:
         st.markdown("""
