@@ -24,7 +24,7 @@ def main():
     args: Namespace = parser.parse_args()
 
     llm_type: str = args.llm.strip().lower()
-    model_name: Optional[str] = args.model_name()
+    model_name: Optional[str] = args.model_name
 
     # initialize llm
     llm: Optional[Union[OpenAI, HuggingFaceHub]] = None
