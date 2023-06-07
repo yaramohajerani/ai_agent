@@ -115,7 +115,7 @@ def main():
                   "Slack messages, reminders and calendars events, interact with users and documents, and more...]*")
     col2.image("images.dir/robot_logo.png")
 
-    st.video('https://youtu.be/DPoGo01QO5Y', format="video/mp4", start_time=0)
+    st.video('https://youtu.be/bA_kGKQ8yZc', format="video/mp4", start_time=0)
 
     main_tab, setup_tab, docs_tab = st.tabs(["Main", "How to Setup", "Other Notes and Docs"])
 
